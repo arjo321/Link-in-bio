@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="utf-8" /> 
+   <meta name="viewport" content="width=device-width,initial-scale=1" /> 
+   <meta name="description" content="ARJO - Digital Creator, Editor, and Football Enthusiast. Check out my latest links and social media.">
+   <meta name="theme-color" content="#000000">
+   <title>Link-in-Bio — ARJO</title> 
+   
+   <link rel="icon" type="image/png" href="pp.png">
+   <link rel="apple-touch-icon" href="pp.png">
+   
+   <link rel="preconnect" href="https://cdn.jsdelivr.net">
+   <link rel="preconnect" href="https://unpkg.com">
+   <link rel="preconnect" href="https://fonts.googleapis.com">
+   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+   <script src="https://cdn.tailwindcss.com"></script>
+   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+   <script src="https://cdn.jsdelivr.net/npm/lucide@0.418.0/dist/umd/lucide.min.js"></script>
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #000000;
+            color: #ffffff;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        .bg-image {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('assets/bg.jpg');
+            background-size: cover;
+            background-position: center;
+            z-index: -1;
+        }
+
+        .glass-card {
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .glass-card:hover {
+            transform: scale(1.02);
+            border-color: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.05);
+        }
+
+        .glow-border {
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .pulse-animation {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 1; box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.4); }
+            70% { transform: scale(1.05); opacity: 0.8; box-shadow: 0 0 0 10px rgba(255, 255, 255, 0); }
+            100% { transform: scale(1); opacity: 1; box-shadow: 0 0 0 0 rgba(255, 255, 255, 0); }
+        }
+
+        .music-player-glow {
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.05);
+        }
+
+        input, textarea {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: white;
+            transition: all 0.3s ease;
+        }
+
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: rgba(255, 255, 255, 0.3);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #000;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #333;
+            border-radius: 10px;
+        }
+
+        /* RGB Glow Animation */
+
+
+        .rgb-glow {
+            animation: rgb-glow 5s linear infinite;
+        }
+
+        /* Ensure icons are visible */
+        svg {
+            stroke: currentColor;
+            fill: none;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col sm:flex-row items-center justify-center p-4 sm:p-6 bg-black selection:bg-white/20">
+    <div class="bg-image"></div>
+    
+    <div class="fixed top-4 right-4 sm:top-6 sm:right-6 z-50">
+        <div class="glass-card p-2 sm:p-3 rounded-full flex items-center gap-2 sm:gap-3 music-player-glow" data-aos="fade-left">
+            <div class="text-right hidden xs:block">
+                <p class="text-[8px] sm:text-[10px] text-gray-500 uppercase tracking-widest font-bold">Now Playing</p>
+                <p class="text-[10px] sm:text-xs font-medium" id="track-name">princess bubelgum</p>
+            </div>
+            <button id="music-toggle" aria-label="Toggle Music" class="w-8 h-8 sm:w-10 sm:h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-white/20 transition-all active:scale-90 relative">
+                <div id="pulse-ring" class="absolute inset-0 rounded-full border border-white/40 opacity-0" aria-hidden="true"></div>
+                <i data-lucide="play" id="play-icon" class="w-4 h-4 sm:w-5 sm:h-5" aria-hidden="true"></i>
+                <i data-lucide="pause" id="pause-icon" class="w-4 h-4 sm:w-5 sm:h-5 hidden" aria-hidden="true"></i>
+            </button>
+        </div>
+        <audio id="bg-audio" loop preload="none">
+            <source src="assets/song.mp3" type="audio/mpeg">
+        </audio>
+    </div>
+
+    <div class="w-full max-w-lg flex flex-col gap-6">
+        <div class="glass-card w-full p-6 sm:p-8 rounded-2xl sm:rounded-3xl shadow-2xl relative z-10" data-aos="zoom-in" data-aos-duration="1200">
+
+    <!-- Profile Section -->
+    <div class="flex flex-col items-center text-center mb-10" data-aos="fade-down" data-aos-duration="1000">
+        <div class="relative mb-4">
+            <div class="w-24 h-24 rounded-full glow-border p-1 overflow-hidden relative z-10 bg-black">
+                <img src="assets/pfp.png" alt="ARJO Profile Picture" class="w-full h-full rounded-full object-cover" width="96" height="96" loading="eager">
+            </div>
+            <img src="assets/in_love.webp" alt="Discord Decoration" class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[125%] h-[125%] max-w-none z-20 pointer-events-none">
+        </div>
+        <h1 class="text-3xl font-bold tracking-tight mb-2 flex items-center gap-2 justify-center rgb-glow">
+            <i data-lucide="link" class="w-6 h-6" aria-hidden="true"></i> ARJO
+        </h1>
+        <p class="text-gray-400 font-light max-w-xs mx-auto">Editor · Football · IDK</p>
+    </div>
+
+    <div class="w-full max-w-md space-y-4 mb-16">
+        <a href="https://www.instagram.com/arjo.ae2/" target="_blank" rel="noopener" class="glass-card flex items-center p-4 rounded-xl group" data-aos="fade-up" data-aos-delay="100" aria-label="Visit ARJO on Instagram">
+    <div class="bg-white/10 p-2 rounded-lg mr-4 group-hover:bg-white/20 transition-colors">
+        <img src="assets/instagram.svg" alt="Instagram Icon" class="w-6 h-6 object-contain" width="24" height="24" loading="lazy">
+    </div>
+    <span class="flex-grow font-medium">Instagram</span>
+    <i data-lucide="external-link" class="w-4 h-4 text-gray-500 opacity-0 group-hover:opacity-100 transition-opacity" aria-hidden="true"></i>
+       </a>
+
+                <a href="https://www.youtube.com/@ArjoxAep" target="_blank" rel="noopener" class="glass-card flex items-center p-4 rounded-xl group" data-aos="fade-up" data-aos-delay="100" aria-label="Visit ARJO on YouTube">
+    <div class="bg-white/10 p-2 rounded-lg mr-4 group-hover:bg-white/20 transition-colors">
+        <img src="assets/youtube-icon.svg" alt="YouTube Icon" class="w-6 h-6 object-contain" width="24" height="24" loading="lazy">
+    </div>
+    <span class="flex-grow font-medium">YouTube</span>
+    <i data-lucide="external-link" class="w-4 h-4 text-gray-500 opacity-0 group-hover:opacity-100 transition-opacity" aria-hidden="true"></i>
+       </a>
+
+        
+
+                <a href="https://discord.com/users/711106072118689834" target="_blank" rel="noopener" class="glass-card flex items-center p-4 rounded-xl group" data-aos="fade-up" data-aos-delay="100" aria-label="Connect with ARJO on Discord">
+    <div class="bg-white/10 p-2 rounded-lg mr-4 group-hover:bg-white/20 transition-colors">
+        <img src="assets/discord.svg" alt="Discord Icon" class="w-6 h-6 object-contain" width="24" height="24" loading="lazy">
+    </div>
+    <span class="flex-grow font-medium">Discord</span>
+    <i data-lucide="external-link" class="w-4 h-4 text-gray-500 opacity-0 group-hover:opacity-100 transition-opacity" aria-hidden="true"></i>
+       </a>
+    </div>
+
+    <footer class="mt-4 text-gray-400 text-[10px] text-center" data-aos="fade-up">
+        <p>© 2026 ARJO. Built with Tailwind & Lucide.</p>
+    </footer>
+
+    </div>
+
+    <div class="relative sm:fixed sm:bottom-6 sm:left-6 z-50 w-full sm:max-w-[280px]" data-aos="fade-right">
+        <div class="glass-card p-4 rounded-2xl shadow-xl border-white/10">
+            <h2 class="text-xs sm:text-sm font-semibold mb-3 flex items-center gap-2">
+                <i data-lucide="mail" class="w-3 h-3 sm:w-4 sm:h-4 text-gray-400" aria-hidden="true"></i> Send a Letter
+            </h2>
+            <form action="https://formspree.io/f/mdaylyoe" method="POST" class="space-y-2">
+                <div>
+                    <label for="name" class="sr-only">Your Name</label>
+                    <input type="text" id="name" name="name" placeholder="Your Name" required 
+                        class="w-full p-2 text-[10px] sm:text-xs rounded-lg focus:ring-1 focus:ring-white/20">
+                </div>
+                <div>
+                    <label for="message" class="sr-only">Your Message</label>
+                    <textarea id="message" name="message" placeholder="Your Message" rows="2" required 
+                        class="w-full p-2 text-[10px] sm:text-xs rounded-lg focus:ring-1 focus:ring-white/20 resize-none"></textarea>
+                </div>
+                <button type="submit" aria-label="Send letter"
+                    class="w-full bg-white text-black text-[10px] sm:text-xs font-bold py-2 rounded-lg hover:bg-gray-200 transition-all active:scale-95 flex items-center justify-center gap-1">
+                    Send <i data-lucide="send" class="w-3 h-3" aria-hidden="true"></i>
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+
+    <script>
+        // Initialize Lucide Icons with specific settings
+        function initIcons() {
+            if (window.lucide) {
+                lucide.createIcons();
+            }
+        }
+        initIcons();
+
+        // Initialize AOS
+        AOS.init({
+            once: true,
+            duration: 800,
+            easing: 'ease-out-cubic'
+        });
+
+        // Music Player Logic
+        const audio = document.getElementById('bg-audio');
+        const toggleBtn = document.getElementById('music-toggle');
+        const playIcon = document.getElementById('play-icon');
+        const pauseIcon = document.getElementById('pause-icon');
+        const pulseRing = document.getElementById('pulse-ring');
+
+        toggleBtn.addEventListener('click', () => {
+            if (audio.paused) {
+                audio.play();
+                playIcon.classList.add('hidden');
+                pauseIcon.classList.remove('hidden');
+                pulseRing.classList.add('pulse-animation');
+            } else {
+                audio.pause();
+                playIcon.classList.remove('hidden');
+                pauseIcon.classList.add('hidden');
+                pulseRing.classList.remove('pulse-animation');
+            }
+        });
+
+        // Set volume to be subtle
+        audio.volume = 0.3;
+    </script>
+</body>
+</html>
