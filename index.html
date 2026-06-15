@@ -3,11 +3,11 @@
 <head>
    <meta charset="utf-8" /> 
    <meta name="viewport" content="width=device-width,initial-scale=1" /> 
-   <meta name="description" content="ARJO - Digital Creator, Editor, and Football Enthusiast. Check out my latest links and social media.">
+   <meta name="description" content="ARJO & JAQLIV - Digital Creators. Check out our latest links, projects, and social media.">
    <meta name="theme-color" content="#000000">
-   <title>Link-in-Bio — ARJO</title> 
+   <title>Link-in-Bio — ARJO & JAQLIV</title> 
    
-   <link rel="icon" type="image/png" href="assets/pfp.png">
+   <link rel="icon" type="image/gif" href="assets/falcon.png">
    <link rel="apple-touch-icon" href="assets/pfp.png">
    
    <link rel="preconnect" href="https://cdn.jsdelivr.net">
@@ -23,6 +23,12 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
         
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
             font-family: 'Inter', sans-serif;
             background-color: #000000;
@@ -41,6 +47,26 @@
             background-size: cover;
             background-position: center;
             z-index: -1;
+        }
+
+        body.video-bg .bg-image {
+            background-image: none;
+        }
+
+        video.bg-video {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.5s;
+        }
+
+        body.video-bg video.bg-video {
+            opacity: 1;
         }
 
         .glass-card {
@@ -100,14 +126,10 @@
             border-radius: 10px;
         }
 
-        /* RGB Glow Animation */
-
-
         .rgb-glow {
             animation: rgb-glow 5s linear infinite;
         }
 
-        /* Ensure icons are visible */
         svg {
             stroke: currentColor;
             fill: none;
@@ -115,10 +137,334 @@
             stroke-linecap: round;
             stroke-linejoin: round;
         }
+
+        /* Theme System */
+        .theme-controls {
+            position: fixed;
+            bottom: 6px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+            z-index: 50;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 8px 15px;
+            border-radius: 25px;
+            backdrop-filter: blur(10px);
+        }
+
+        .theme-btn {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            background-color: rgba(255, 255, 255, 0.05);
+            color: white;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 12px;
+            transition: all 0.3s;
+        }
+
+        .theme-btn:hover {
+            transform: scale(1.1);
+            border-color: rgba(255, 255, 255, 0.8);
+        }
+
+        .theme-btn.active {
+            background-color: rgba(255, 255, 255, 0.2);
+            border-color: rgba(255, 255, 255, 0.8);
+        }
+
+        /* Skills Section */
+        .skills-container {
+            margin-top: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .skill-item {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            padding: 12px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+        }
+
+        .skill-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .skill-bar {
+            height: 6px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .skill-progress {
+            height: 100%;
+            border-radius: 3px;
+            width: 0%;
+            transition: width 2s ease;
+            background: linear-gradient(90deg, #ff6b6b, #ff9f9f);
+        }
+
+        .skill-progress.python {
+            background: linear-gradient(90deg, #3776ab, #ffd43b);
+        }
+
+        .skill-progress.js {
+            background: linear-gradient(90deg, #f7df1e, #f1e05a);
+        }
+
+        .skill-progress.design {
+            background: linear-gradient(90deg, #e34c26, #ff6b6b);
+        }
+
+        @media (max-width: 768px) {
+            .theme-controls {
+                bottom: 12px;
+                gap: 6px;
+                padding: 6px 10px;
+            }
+
+            .theme-btn {
+                width: 28px;
+                height: 28px;
+                font-size: 11px;
+            }
+        }
+
+        /* ===== ENHANCED HOVER ANIMATIONS ===== */
+
+        /* Lift + glow on link cards */
+        a.glass-card:hover {
+            transform: translateY(-4px) scale(1.02);
+            border-color: rgba(255,255,255,0.25);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.5), 0 0 30px rgba(255,255,255,0.05);
+        }
+
+        /* External link icon slide-in */
+        a.glass-card .lucide-external-link {
+            transform: translate(-4px, 4px);
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+        a.glass-card:hover .lucide-external-link {
+            transform: translate(0, 0);
+            opacity: 1 !important;
+        }
+
+        /* Profile avatar ring pulse + tilt on hover */
+        .profile-avatar-wrap {
+            transition: transform 0.4s cubic-bezier(0.34,1.56,0.64,1);
+        }
+        .profile-avatar-wrap:hover {
+            transform: scale(1.08) rotate(-2deg);
+        }
+
+        /* Music player glow breathe on hover */
+        #music-toggle {
+            transition: background 0.3s, transform 0.2s, box-shadow 0.3s;
+        }
+        #music-toggle:hover {
+            background: rgba(255,255,255,0.25);
+            box-shadow: 0 0 20px rgba(255,255,255,0.2);
+            transform: scale(1.12);
+        }
+
+        /* Theme button magnetic pop */
+        .theme-btn {
+            transition: transform 0.25s cubic-bezier(0.34,1.56,0.64,1), border-color 0.3s, background 0.3s, box-shadow 0.3s;
+        }
+        .theme-btn:hover {
+            transform: scale(1.25) translateY(-3px);
+            box-shadow: 0 6px 20px rgba(255,255,255,0.15);
+        }
+
+        /* Send button shimmer */
+        .send-btn {
+            position: relative;
+            overflow: hidden;
+            transition: background 0.3s, transform 0.2s, box-shadow 0.3s;
+        }
+        .send-btn::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -60%;
+            width: 40%;
+            height: 200%;
+            background: linear-gradient(120deg, transparent, rgba(0,0,0,0.08), transparent);
+            transform: skewX(-20deg);
+            transition: left 0.45s ease;
+        }
+        .send-btn:hover::after {
+            left: 130%;
+        }
+        .send-btn:hover {
+            background: #e8e8e8;
+            box-shadow: 0 4px 20px rgba(255,255,255,0.25);
+            transform: translateY(-2px);
+        }
+
+        /* Skill bar hover highlight */
+        .skill-item {
+            transition: background 0.3s, transform 0.3s;
+        }
+        .skill-item:hover {
+            background: rgba(255,255,255,0.09);
+            transform: translateX(4px);
+        }
+
+        /* ===== CURSOR TRAIL ===== */
+        .cursor-dot {
+            position: fixed;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.85);
+            pointer-events: none;
+            z-index: 9999;
+            top: 0;
+            left: 0;
+            will-change: transform;
+            mix-blend-mode: difference;
+            transition: width 0.15s, height 0.15s, opacity 0.2s;
+        }
+
+        .cursor-ring {
+            position: fixed;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            border: 1.5px solid rgba(255,255,255,0.5);
+            pointer-events: none;
+            z-index: 9998;
+            top: 0;
+            left: 0;
+            will-change: transform;
+            mix-blend-mode: difference;
+            transition: width 0.2s, height 0.2s, opacity 0.3s, border-color 0.2s;
+        }
+
+        body:hover .cursor-dot { opacity: 1; }
+
+        /* Hide cursor on touch/mobile devices */
+        @media (hover: none), (max-width: 640px) {
+            .cursor-dot, .cursor-ring { display: none !important; }
+        }
+
+        /* ===== TOAST NOTIFICATION ===== */
+        #toast {
+            position: fixed;
+            bottom: 80px;
+            left: 50%;
+            transform: translateX(-50%) translateY(20px);
+            background: rgba(255,255,255,0.12);
+            backdrop-filter: blur(14px);
+            border: 1px solid rgba(255,255,255,0.2);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 50px;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            opacity: 0;
+            pointer-events: none;
+            z-index: 200;
+            transition: opacity 0.3s, transform 0.3s;
+        }
+        #toast.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        /* ===== SCROLL TO TOP BUTTON ===== */
+        #scrollTop {
+            position: fixed;
+            bottom: 72px;
+            right: 20px;
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            color: white;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 50;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s, transform 0.3s, background 0.3s;
+            backdrop-filter: blur(10px);
+        }
+        #scrollTop.visible {
+            opacity: 1;
+            pointer-events: all;
+        }
+        #scrollTop:hover {
+            background: rgba(255,255,255,0.2);
+            transform: translateY(-3px) scale(1.1);
+        }
+
+        /* ===== RGB GLOW on title ===== */
+        @keyframes rgb-glow {
+            0%   { text-shadow: 0 0 8px #ff006e, 0 0 20px #ff006e44; }
+            25%  { text-shadow: 0 0 8px #00f5ff, 0 0 20px #00f5ff44; }
+            50%  { text-shadow: 0 0 8px #ffe600, 0 0 20px #ffe60044; }
+            75%  { text-shadow: 0 0 8px #a855f7, 0 0 20px #a855f744; }
+            100% { text-shadow: 0 0 8px #ff006e, 0 0 20px #ff006e44; }
+        }
+
+        /* ===== FLOATING PARTICLES ===== */
+        .particle {
+            position: fixed;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 0;
+            animation: floatUp linear infinite;
+            opacity: 0;
+        }
+        @keyframes floatUp {
+            0%   { transform: translateY(100vh) scale(0); opacity: 0; }
+            10%  { opacity: 0.4; }
+            90%  { opacity: 0.15; }
+            100% { transform: translateY(-10vh) scale(1.2); opacity: 0; }
+        }
     </style>
 </head>
 <body class="min-h-screen flex flex-col sm:flex-row items-center justify-center p-4 sm:p-6 bg-black selection:bg-white/20">
+
+    <!-- Custom Cursor -->
+    <div class="cursor-dot" id="cursorDot"></div>
+    <div class="cursor-ring" id="cursorRing"></div>
+
+    <!-- Toast Notification -->
+    <div id="toast">✓ Copied to clipboard!</div>
+
+    <!-- Scroll to Top -->
+    <button id="scrollTop" aria-label="Scroll to top">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg>
+    </button>
+    
+    <div id="start-screen" class="fixed inset-0 bg-black/95 backdrop-blur-md flex items-center justify-center z-[100] cursor-pointer transition-opacity duration-700">
+        <div id="start-text" class="font-mono text-xl sm:text-2xl text-white text-center px-4 tracking-widest"></div>
+    </div>
+
     <div class="bg-image"></div>
+    <video class="bg-video" autoplay loop muted playsinline webkit-playsinline></video>
     
     <div class="fixed top-4 right-4 sm:top-6 sm:right-6 z-50">
         <div class="glass-card p-2 sm:p-3 rounded-full flex items-center gap-2 sm:gap-3 music-player-glow" data-aos="fade-left">
@@ -138,55 +484,53 @@
     </div>
 
     <div class="w-full max-w-lg flex flex-col gap-6">
-        <div class="glass-card w-full p-6 sm:p-8 rounded-2xl sm:rounded-3xl shadow-2xl relative z-10" data-aos="zoom-in" data-aos-duration="1200">
+    <div class="glass-card w-full p-6 sm:p-8 rounded-2xl sm:rounded-3xl shadow-2xl relative z-10" data-aos="zoom-in" data-aos-duration="1200">
 
-    <!-- Profile Section -->
-    <div class="flex flex-col items-center text-center mb-10" data-aos="fade-down" data-aos-duration="1000">
-        <div class="relative mb-4">
-            <div class="w-24 h-24 rounded-full glow-border p-1 overflow-hidden relative z-10 bg-black">
-                <img src="assets/pfp.png" alt="ARJO Profile Picture" class="w-full h-full rounded-full object-cover" width="96" height="96" loading="eager">
+        <div class="flex flex-col items-center text-center mb-10" data-aos="fade-down" data-aos-duration="1000">
+            <div class="relative mb-4 profile-avatar-wrap">
+                <div class="w-24 h-24 rounded-full glow-border p-1 overflow-hidden relative z-10 bg-black">
+                    <img src="assets/pfp.png" alt="ARJO Profile Picture" class="w-full h-full rounded-full object-cover" width="96" height="96" loading="eager">
+                </div>
+                <img src="assets/in_love.webp" alt="Discord Decoration" class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[125%] h-[125%] max-w-none z-20 pointer-events-none">
             </div>
-            <img src="assets/in_love.webp" alt="Discord Decoration" class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[125%] h-[125%] max-w-none z-20 pointer-events-none">
+            <h1 class="text-3xl font-bold tracking-tight mb-2 flex items-center gap-2 justify-center rgb-glow">
+                <i data-lucide="link" class="w-6 h-6" aria-hidden="true"></i> ARJO
+            </h1>
+            <p class="text-gray-400 font-light max-w-xs mx-auto">Editor · Football · IDK</p>
         </div>
-        <h1 class="text-3xl font-bold tracking-tight mb-2 flex items-center gap-2 justify-center rgb-glow">
-            <i data-lucide="link" class="w-6 h-6" aria-hidden="true"></i> ARJO
-        </h1>
-        <p class="text-gray-400 font-light max-w-xs mx-auto">Editor · Football · IDK</p>
-    </div>
 
-    <div class="w-full max-w-md space-y-4 mb-16">
-        <a href="https://www.instagram.com/arjo.ae2/" target="_blank" rel="noopener" class="glass-card flex items-center p-4 rounded-xl group" data-aos="fade-up" data-aos-delay="100" aria-label="Visit ARJO on Instagram">
-    <div class="bg-white/10 p-2 rounded-lg mr-4 group-hover:bg-white/20 transition-colors">
-        <img src="assets/instagram.svg" alt="Instagram Icon" class="w-6 h-6 object-contain" width="24" height="24" loading="lazy">
-    </div>
-    <span class="flex-grow font-medium">Instagram</span>
-    <i data-lucide="external-link" class="w-4 h-4 text-gray-500 opacity-0 group-hover:opacity-100 transition-opacity" aria-hidden="true"></i>
-       </a>
+        <div class="w-full max-w-md mx-auto space-y-4 mb-16">
+            <a href="https://www.instagram.com/arjo.ae2/" target="_blank" rel="noopener" class="glass-card flex items-center p-4 rounded-xl group" data-aos="fade-up" data-aos-delay="100" aria-label="Visit ARJO on Instagram">
+                <div class="bg-white/10 p-2 rounded-lg mr-4 group-hover:bg-white/20 transition-colors">
+                    <img src="assets/instagram.svg" alt="Instagram Icon" class="w-6 h-6 object-contain" width="24" height="24" loading="lazy">
+                </div>
+                <span class="flex-grow font-medium">Instagram</span>
+                <i data-lucide="external-link" class="w-4 h-4 text-gray-500 opacity-0 group-hover:opacity-100 transition-opacity" aria-hidden="true"></i>
+            </a>
 
-                <a href="https://www.youtube.com/@ArjoxAep" target="_blank" rel="noopener" class="glass-card flex items-center p-4 rounded-xl group" data-aos="fade-up" data-aos-delay="100" aria-label="Visit ARJO on YouTube">
-    <div class="bg-white/10 p-2 rounded-lg mr-4 group-hover:bg-white/20 transition-colors">
-        <img src="assets/youtube-icon.svg" alt="YouTube Icon" class="w-6 h-6 object-contain" width="24" height="24" loading="lazy">
-    </div>
-    <span class="flex-grow font-medium">YouTube</span>
-    <i data-lucide="external-link" class="w-4 h-4 text-gray-500 opacity-0 group-hover:opacity-100 transition-opacity" aria-hidden="true"></i>
-       </a>
+            <a href="https://www.youtube.com/@ArjoxAep" target="_blank" rel="noopener" class="glass-card flex items-center p-4 rounded-xl group" data-aos="fade-up" data-aos-delay="100" aria-label="Visit ARJO on YouTube">
+                <div class="bg-white/10 p-2 rounded-lg mr-4 group-hover:bg-white/20 transition-colors">
+                    <img src="assets/youtube-icon.svg" alt="YouTube Icon" class="w-6 h-6 object-contain" width="24" height="24" loading="lazy">
+                </div>
+                <span class="flex-grow font-medium">YouTube</span>
+                <i data-lucide="external-link" class="w-4 h-4 text-gray-500 opacity-0 group-hover:opacity-100 transition-opacity" aria-hidden="true"></i>
+            </a>
 
-        
+            <a href="https://discord.com/users/711106072118689834" target="_blank" rel="noopener" class="glass-card flex items-center p-4 rounded-xl group" data-aos="fade-up" data-aos-delay="100" aria-label="Connect with ARJO on Discord">
+                <div class="bg-white/10 p-2 rounded-lg mr-4 group-hover:bg-white/20 transition-colors">
+                    <img src="assets/discord.svg" alt="Discord Icon" class="w-6 h-6 object-contain" width="24" height="24" loading="lazy">
+                </div>
+                <span class="flex-grow font-medium">Discord</span>
+                <i data-lucide="external-link" class="w-4 h-4 text-gray-500 opacity-0 group-hover:opacity-100 transition-opacity" aria-hidden="true"></i>
+            </a>
+        </div>
 
-                <a href="https://discord.com/users/711106072118689834" target="_blank" rel="noopener" class="glass-card flex items-center p-4 rounded-xl group" data-aos="fade-up" data-aos-delay="100" aria-label="Connect with ARJO on Discord">
-    <div class="bg-white/10 p-2 rounded-lg mr-4 group-hover:bg-white/20 transition-colors">
-        <img src="assets/discord.svg" alt="Discord Icon" class="w-6 h-6 object-contain" width="24" height="24" loading="lazy">
-    </div>
-    <span class="flex-grow font-medium">Discord</span>
-    <i data-lucide="external-link" class="w-4 h-4 text-gray-500 opacity-0 group-hover:opacity-100 transition-opacity" aria-hidden="true"></i>
-       </a>
-    </div>
-
-    <footer class="mt-4 text-gray-400 text-[10px] text-center" data-aos="fade-up">
-        <p>© 2026 ARJO. Built with Tailwind & Lucide.</p>
-    </footer>
+        <footer class="mt-4 text-gray-400 text-[10px] text-center" data-aos="fade-up">
+            <p>© 2026 ARJO. Built with Tailwind & Lucide.</p>
+        </footer>
 
     </div>
+</div>
 
     <div class="relative sm:fixed sm:bottom-6 sm:left-6 z-50 w-full sm:max-w-[280px]" data-aos="fade-right">
         <div class="glass-card p-4 rounded-2xl shadow-xl border-white/10">
@@ -204,17 +548,24 @@
                     <textarea id="message" name="message" placeholder="Your Message" rows="2" required 
                         class="w-full p-2 text-[10px] sm:text-xs rounded-lg focus:ring-1 focus:ring-white/20 resize-none"></textarea>
                 </div>
-                <button type="submit" aria-label="Send letter"
-                    class="w-full bg-white text-black text-[10px] sm:text-xs font-bold py-2 rounded-lg hover:bg-gray-200 transition-all active:scale-95 flex items-center justify-center gap-1">
+                <button type="submit" aria-label="Send letter" class="send-btn w-full bg-white text-black text-[10px] sm:text-xs font-bold py-2 rounded-lg hover:bg-gray-200 transition-all active:scale-95 flex items-center justify-center gap-1">
                     Send <i data-lucide="send" class="w-3 h-3" aria-hidden="true"></i>
                 </button>
             </form>
         </div>
     </div>
-</div>
 
+    <div class="theme-controls">
+        <button class="theme-btn active" data-theme="default" title="Default Theme">🌙</button>
+        <button class="theme-btn" data-theme="dark" title="Dark Mode">🖤</button>
+        <button class="theme-btn" data-theme="vibrant" title="Vibrant">✨</button>
+        <button class="theme-btn" data-theme="ocean" title="Ocean">🌊</button>
+        <button class="theme-btn" data-theme="sunset" title="Sunset">🌅</button>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script>
-        // Initialize Lucide Icons with specific settings
+        // Initialize Lucide Icons
         function initIcons() {
             if (window.lucide) {
                 lucide.createIcons();
@@ -222,20 +573,74 @@
         }
         initIcons();
 
-        // Initialize AOS
-        AOS.init({
-            once: true,
-            duration: 800,
-            easing: 'ease-out-cubic'
+        // Start Screen & Typewriter Logic
+        const startScreen = document.getElementById('start-screen');
+        const startText = document.getElementById('start-text');
+        const startMessage = "Click here to enter";
+        let startTextContent = '';
+        let startIndex = 0;
+        let startCursorVisible = true;
+        let isStarted = false;
+
+        function typeWriterStart() {
+            if (startIndex < startMessage.length) {
+                startTextContent = startMessage.slice(0, startIndex + 1);
+                startIndex++;
+                startText.textContent = startTextContent + (startCursorVisible ? '|' : ' ');
+                setTimeout(typeWriterStart, 100);
+            }
+        }
+
+        const cursorInterval = setInterval(() => {
+            startCursorVisible = !startCursorVisible;
+            if (!isStarted) {
+                startText.textContent = startTextContent + (startCursorVisible ? '|' : ' ');
+            }
+        }, 500);
+
+        // Start typing effect on load
+        window.addEventListener('load', () => {
+            setTimeout(typeWriterStart, 500);
         });
 
-        // Music Player Logic
+        // Music Player Logic Variables
         const audio = document.getElementById('bg-audio');
         const toggleBtn = document.getElementById('music-toggle');
         const playIcon = document.getElementById('play-icon');
         const pauseIcon = document.getElementById('pause-icon');
         const pulseRing = document.getElementById('pulse-ring');
+        
+        audio.volume = 0.3;
 
+        // Enter Event
+        startScreen.addEventListener('click', () => {
+            if (isStarted) return;
+            isStarted = true;
+            clearInterval(cursorInterval);
+            
+            // Fade out the black screen
+            startScreen.style.opacity = '0';
+            setTimeout(() => {
+                startScreen.style.display = 'none';
+            }, 700);
+
+            // Play music automatically after interaction
+            audio.play().catch(console.error);
+            playIcon.classList.add('hidden');
+            pauseIcon.classList.remove('hidden');
+            pulseRing.classList.add('pulse-animation');
+
+            // Initialize AOS animations so they pop in AFTER the click
+            setTimeout(() => {
+                AOS.init({
+                    once: true,
+                    duration: 800,
+                    easing: 'ease-out-cubic'
+                });
+            }, 100);
+        });
+
+        // Music Toggle Event
         toggleBtn.addEventListener('click', () => {
             if (audio.paused) {
                 audio.play();
@@ -250,8 +655,145 @@
             }
         });
 
-        // Set volume to be subtle
-        audio.volume = 0.3;
+        // Theme System
+        const themes = {
+            default: {
+                bg: 'rgba(0, 0, 0, 0.6)',
+                accent: '#ffffff',
+                primary: '#00CED1'
+            },
+            dark: {
+                bg: 'rgba(0, 0, 0, 0.95)',
+                accent: '#e0e0e0',
+                primary: '#1a1a1a'
+            },
+            vibrant: {
+                bg: 'rgba(10, 5, 20, 0.9)',
+                accent: '#ff006e',
+                primary: '#00f5ff'
+            },
+            ocean: {
+                bg: 'rgba(0, 20, 40, 0.85)',
+                accent: '#00d4ff',
+                primary: '#0099cc'
+            },
+            sunset: {
+                bg: 'rgba(40, 10, 0, 0.85)',
+                accent: '#ffa500',
+                primary: '#ff6b35'
+            }
+        };
+
+        document.querySelectorAll('.theme-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                document.querySelectorAll('.theme-btn').forEach(b => b.classList.remove('active'));
+                e.target.classList.add('active');
+
+                const theme = themes[e.target.dataset.theme];
+                document.documentElement.style.setProperty('--primary-color', theme.primary);
+                
+                // Apply theme to glass cards
+                document.querySelectorAll('.glass-card').forEach(card => {
+                    card.style.background = theme.bg;
+                });
+            });
+        });
+
+        // Parallax effect on scroll
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const video = document.querySelector('video.bg-video');
+            if (video) {
+                video.style.transform = `translateY(${scrolled * 0.5}px)`;
+            }
+            // Scroll to top button
+            const btn = document.getElementById('scrollTop');
+            btn.classList.toggle('visible', scrolled > 200);
+        });
+
+        // ===== CUSTOM CURSOR (desktop only) =====
+        if (window.matchMedia('(hover: hover)').matches) {
+        const dot = document.getElementById('cursorDot');
+        const ring = document.getElementById('cursorRing');
+        let mouseX = 0, mouseY = 0, ringX = 0, ringY = 0;
+
+        document.addEventListener('mousemove', e => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+            dot.style.transform = `translate(${mouseX - 4}px, ${mouseY - 4}px)`;
+        }, { passive: true });
+
+        function animateRing() {
+            ringX += (mouseX - ringX) * 0.15;
+            ringY += (mouseY - ringY) * 0.15;
+            ring.style.transform = `translate(${ringX - 16}px, ${ringY - 16}px)`;
+            requestAnimationFrame(animateRing);
+        }
+        animateRing();
+
+        document.querySelectorAll('a, button, .theme-btn, .skill-item').forEach(el => {
+            el.addEventListener('mouseenter', () => {
+                ring.style.width = '52px';
+                ring.style.height = '52px';
+                ring.style.borderColor = 'rgba(255,255,255,0.8)';
+                dot.style.width = '4px';
+                dot.style.height = '4px';
+            });
+            el.addEventListener('mouseleave', () => {
+                ring.style.width = '32px';
+                ring.style.height = '32px';
+                ring.style.borderColor = 'rgba(255,255,255,0.5)';
+                dot.style.width = '8px';
+                dot.style.height = '8px';
+            });
+        });
+
+        document.addEventListener('mouseleave', () => { dot.style.opacity = 0; ring.style.opacity = 0; });
+        document.addEventListener('mouseenter', () => { dot.style.opacity = 1; ring.style.opacity = 1; });
+        } // end desktop-only cursor
+
+        // ===== SCROLL TO TOP =====
+        document.getElementById('scrollTop').addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // ===== TOAST HELPER =====
+        function showToast(msg) {
+            const t = document.getElementById('toast');
+            t.textContent = msg;
+            t.classList.add('show');
+            setTimeout(() => t.classList.remove('show'), 2200);
+        }
+
+        // ===== COPY LINK ON RIGHT-CLICK =====
+        document.querySelectorAll('a.glass-card').forEach(link => {
+            link.addEventListener('contextmenu', e => {
+                e.preventDefault();
+                navigator.clipboard.writeText(link.href).then(() => showToast('✓ Link copied!'));
+            });
+        });
+
+        // ===== FLOATING PARTICLES =====
+        function spawnParticle() {
+            const p = document.createElement('div');
+            p.className = 'particle';
+            const size = 2 + Math.random() * 4;
+            const x = Math.random() * 100;
+            const dur = 8 + Math.random() * 10;
+            const delay = Math.random() * 6;
+            p.style.cssText = `
+                width:${size}px; height:${size}px;
+                left:${x}vw;
+                background: rgba(255,255,255,${0.1 + Math.random() * 0.3});
+                animation-duration:${dur}s;
+                animation-delay:${delay}s;
+            `;
+            document.body.appendChild(p);
+            setTimeout(() => p.remove(), (dur + delay) * 1000);
+        }
+        // Spawn particles periodically
+        for (let i = 0; i < 18; i++) spawnParticle();
+        setInterval(spawnParticle, 1800);
     </script>
 </body>
 </html>
